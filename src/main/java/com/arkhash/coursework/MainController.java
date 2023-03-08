@@ -1,9 +1,12 @@
 package com.arkhash.coursework;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -12,7 +15,12 @@ public class MainController {
 
     @FXML
     private TextField nameField, ageField, teamField, modelField, pointsField, idField;
+    @FXML
+    private Label driverSaveDialog;
+    int age;
+    int initialPoints;
 
+    // validates entries made by user
     private boolean isFieldInvalid(TextField field) {
         if (field == nameField) {
             return Utils.hasSpecialCharacters(field.getText());
@@ -31,6 +39,7 @@ public class MainController {
         }
     }
 
+
     @FXML
     protected void onTextChanged(KeyEvent e) {
         TextField field = (TextField) e.getSource();
@@ -43,6 +52,7 @@ public class MainController {
         }
     }
 
+    //describes what happens when Submit button is clicked
     @FXML
     protected void onSubmitButtonClick() throws IOException {
         // performs the respective check
@@ -51,34 +61,52 @@ public class MainController {
             return;
         }
 
-        int age = Utils.getNumber(ageField.getText());
+        // performs the respective check
+        age = Utils.getNumber(ageField.getText());
         if (isFieldInvalid(ageField)) {
             Utils.errorDialog("Please check the age again.");
             return;
         }
 
+        // performs the respective check
         if (isFieldInvalid(teamField)) {
             Utils.errorDialog("Please check the team name again.");
             return;
         }
 
+        // performs the respective check
         if (isFieldInvalid(modelField)) {
             Utils.errorDialog("Please check the model again.");
             return;
         }
 
-        if (isFieldInvalid(idField)) {
-            Utils.errorDialog("Please check the ID again.");
-            return;
-        }
-
-        int initialPoints = Utils.getNumber(pointsField.getText());
+        // performs the respective check
+        initialPoints = Utils.getNumber(pointsField.getText());
         if (isFieldInvalid(pointsField)) {
             Utils.errorDialog("Please check the championship points again.");
             return;
         }
 
+        // performs the respective check
+        if (isFieldInvalid(idField)) {
+            Utils.errorDialog("Please check the ID again.");
+            return;
+        }
+        onDriverStfButtonClick();
+
+        // gets the elements to be stored into a list
+
+    }
+    public void onDriverStfButtonClick() throws IOException {
         Driver driverStore = new Driver(nameField.getText(), age, teamField.getText(), modelField.getText(), initialPoints, idField.getText());
+        // the elements are added to the list.
         drivers.add(driverStore);
+
+        FileWriter writer = new FileWriter("Driver details.txt", true);
+        for (Driver driver : drivers) {
+            writer.write(driverStore.getName() + "," + driverStore.getAge() + "," + driverStore.getTeam() + "," + driverStore.getModel() + "," + driverStore.getCurrentPoints() + "," + driverStore.getDriverID() + "\n");
+        }
+        writer.close();
+        driverSaveDialog.setText("The driver details have been saved successfully!");
     }
 }

@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -31,8 +33,7 @@
                         <TextField fx:id="teamField" layoutX="159.0" layoutY="117.0" onKeyTyped="#onTextChanged" styleClass="invalid-field" />
                         <TextField fx:id="modelField" layoutX="159.0" layoutY="165.0" onKeyTyped="#onTextChanged" styleClass="invalid-field" />
                         <TextField fx:id="idField" layoutX="160.0" layoutY="245.0" onKeyTyped="#onTextChanged" styleClass="invalid-field" />
-                        <Button fx:id="submitButton" layoutX="386.0" layoutY="267.0" mnemonicParsing="false" onAction="#onSubmitButtonClick" text="Submit" />
-                        <Button fx:id="resetButton" layoutX="487.0" layoutY="267.0" mnemonicParsing="false" text="Reset" />
+                        <Button fx:id="submitButton" layoutX="450.0" layoutY="267.0" mnemonicParsing="false" onAction="#onSubmitButtonClick" text="Submit" />
                         <TextField fx:id="ageField" layoutX="160.0" layoutY="79.0" onKeyTyped="#onTextChanged" styleClass="invalid-field" />
                         <TextField fx:id="pointsField" layoutX="161.0" layoutY="204.0" onKeyTyped="#onTextChanged" styleClass="invalid-field" />
                      </children>
@@ -44,9 +45,21 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="346.0" prefWidth="594.0" />
             </content>
           </Tab>
-            <Tab closable="false" text="View Tables">
+            <Tab closable="false" text="Championship Table">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="5.0" prefHeight="317.0" prefWidth="594.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="ID" />
+                            <TableColumn prefWidth="168.0" text="Name" />
+                              <TableColumn minWidth="8.0" prefWidth="56.80000305175781" text="Age" />
+                              <TableColumn prefWidth="95.20001220703125" text="Team" />
+                              <TableColumn prefWidth="104.0" text="Model" />
+                              <TableColumn prefWidth="94.4000244140625" text="Current points" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab closable="false" text="Simulating Race">
@@ -54,9 +67,34 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
-            <Tab closable="false" text="Save and Load">
+            <Tab text="Race Table">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="515.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="4.0" layoutY="-1.0" prefHeight="318.0" prefWidth="600.0">
+                          <columns>
+                            <TableColumn prefWidth="64.00002765655518" text="Date" />
+                            <TableColumn prefWidth="86.39996337890625" text="Location" />
+                              <TableColumn prefWidth="75.0" text="Winner" />
+                              <TableColumn prefWidth="68.00001525878906" text="Points" />
+                              <TableColumn prefWidth="94.39996337890625" text="Second place" />
+                              <TableColumn prefWidth="64.00006103515625" text="Points" />
+                              <TableColumn prefWidth="75.0" text="Third place" />
+                              <TableColumn prefWidth="75.0" text="Points" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Save and Load">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="driverSaveDialog" layoutX="14.0" layoutY="202.0" prefHeight="18.0" prefWidth="263.0" />
+                        <Button fx:id="driverStfButton" layoutX="14.0" layoutY="146.0" mnemonicParsing="false" onAction="#onDriverStfButtonClick" text="Driver Details" />
+                        <Label layoutX="114.0" layoutY="44.0" text="Save" />
+                     </children></AnchorPane>
               </content>
             </Tab>
         </tabs>

@@ -51,13 +51,19 @@ public class Utils {
 
     // produces the error message to user in case of invalid info
     public static void errorDialog(String error) throws IOException {
+        // creates a new stage
         Stage stage = new Stage();
+        // loads the fxml file named error-dialog.fxml
         FXMLLoader fxmlLoader = new FXMLLoader(WRCC.class.getResource("error-dialog.fxml"));
+        // loads the new scene
         Scene scene = new Scene(fxmlLoader.load());
         ErrorDialog dialog = fxmlLoader.getController();
         dialog.setMessage(error);
+        // creates the title for the window
         stage.setTitle("Error!");
+        // sets the scene to the stage
         stage.setScene(scene);
+        // displays the stage
         stage.show();
     }
 }
