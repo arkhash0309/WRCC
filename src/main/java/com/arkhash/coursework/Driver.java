@@ -2,8 +2,6 @@ package com.arkhash.coursework;
 
 public class Driver {
     private String name;
-
-
     private int age;
     private String team;
     private String model;

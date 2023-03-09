@@ -26,15 +26,15 @@ public class Utils {
         return false;
     }
 
-    // checks if there are any spaces.
-    public static boolean hasSpaces(String text) {
+    // checks if there are any commas.
+    public static boolean hasCommas(String text) {
         // checks if the text is empty
         if (isEmpty(text)) return true;
         // goes through every character
         char[] chars = text.toCharArray();
         for (char ch : chars) {
-            // checks for blank string
-            if (ch == ' ') return true;
+            // checks for comma
+            if (ch == ',') return true;
         }
         return false;
     }
@@ -49,21 +49,28 @@ public class Utils {
         }
     }
 
-    // produces the error message to user in case of invalid info
-    public static void errorDialog(String error) throws IOException {
-        // creates a new stage
+    private static void dialog(String message, String title) throws IOException {
         Stage stage = new Stage();
-        // loads the fxml file named error-dialog.fxml
-        FXMLLoader fxmlLoader = new FXMLLoader(WRCC.class.getResource("error-dialog.fxml"));
+        // loads the fxml file named dialog.fxml
+        FXMLLoader fxmlLoader = new FXMLLoader(WRCC.class.getResource("dialog.fxml"));
         // loads the new scene
         Scene scene = new Scene(fxmlLoader.load());
-        ErrorDialog dialog = fxmlLoader.getController();
-        dialog.setMessage(error);
+        Dialog dialog = fxmlLoader.getController();
+        dialog.setMessage(message);
         // creates the title for the window
-        stage.setTitle("Error!");
+        stage.setTitle(title);
         // sets the scene to the stage
         stage.setScene(scene);
         // displays the stage
         stage.show();
+    }
+
+    // produces the error message to user in case of invalid info
+    public static void errorDialog(String error) throws IOException {
+        dialog(error,"Error!");
+    }
+
+    public static void successDialog(String success) throws IOException {
+        dialog(success,"Success!");
     }
 }
